@@ -52,15 +52,18 @@ html {
   text-align: center;
 }
 .btn-parent .btn-content a span {
-  border: 1px solid white;
   border-radius: 25px;
-  padding: 2px 20px;
-  transition: 0.1s;
+  padding: 6px 20px;
+  transition: 0.3s;
+  background: url(https://gh.jackcrane.rocks/blog/assets/ct-bkg.jpg);
+  background-size: 250px;
+  background-position: left;
+  color: white;
+  border: 2px solid black;
 }
 .btn-parent .btn-content a span:hover,
 .btn-parent .btn-content a span:active {
-  border: 1px solid red;
-  color: red;
+  background-position: right;
 }
 .signature {
   position: absolute;
