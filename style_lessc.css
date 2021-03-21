@@ -43,15 +43,15 @@ html {
   display: table;
   height: 100%;
 }
-.btn-parent .btn-content a {
+.btn-parent .btn-content div {
   display: table-cell;
   vertical-align: middle;
+}
+a.pill {
+  display: inline-block;
   color: grey;
   text-decoration: none;
-  transition: 0.3s;
   text-align: center;
-}
-.btn-parent .btn-content a span {
   border-radius: 25px;
   padding: 6px 20px;
   transition: 0.3s;
@@ -61,8 +61,8 @@ html {
   color: white;
   border: 2px solid black;
 }
-.btn-parent .btn-content a span:hover,
-.btn-parent .btn-content a span:active {
+a.pill:hover,
+a.pill:active {
   background-position: right;
 }
 .signature {
