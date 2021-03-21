@@ -79,6 +79,12 @@ html {
 .signature a:hover {
   color: #a9a9a9;
 }
+.aboutcwi {
+  display: none;
+}
+.acwip {
+  display: block;
+}
 @font-face {
   font-family: bahnscrift;
   src: url(bahnscrift.ttf);
@@ -90,5 +96,36 @@ html {
   .stache {
     width: 80%;
     max-width: 400px;
+  }
+}
+.acwip {
+  display: none;
+}
+.aboutcwi {
+  display: block;
+  padding: 0px 10%;
+  height: 100%;
+}
+.aboutcwi img {
+  width: 100px;
+}
+.aboutcwi h1 {
+  margin: 0;
+}
+.aboutcwi h2 {
+  color: lightgrey;
+  font-size: 1em;
+  margin: 0;
+}
+.aboutcwi hr {
+  border: 4px solid lightgrey;
+}
+.aboutcwi footer {
+  position: absolute;
+  bottom: 0;
+}
+@media print {
+  .aboutcwi {
+    padding: 0;
   }
 }

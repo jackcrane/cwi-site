@@ -83,6 +83,14 @@ body, html {
   }
 }
 
+.aboutcwi {
+  display:none;
+}
+
+.acwip {
+  display:block;
+}
+
 @font-face {
   font-family: bahnscrift;
   src: url(bahnscrift.ttf)
@@ -96,5 +104,38 @@ body, html {
   .stache {
     width: 80%;
     max-width: 400px
+  }
+}
+
+.acwip {
+  display:none;
+}
+.aboutcwi {
+  display:block;
+  padding:0px 10%;
+  height:100%;
+  img {
+    width:100px;
+  }
+  h1 {
+    margin:0;
+  }
+  h2 {
+    color:lightgrey;
+    font-size:1em;
+    margin:0;
+  }
+  hr {
+    border:4px solid lightgrey;
+  }
+  footer {
+    position:absolute;
+    bottom:0;
+  }
+}
+
+@media print {
+  .aboutcwi {
+    padding:0;
   }
 }
