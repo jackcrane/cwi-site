@@ -1,3 +1,5 @@
+// out: style_lessc.css, sourcemap: true, compress: true
+
 body, html {
   padding: 0;
   margin: 0;
@@ -53,23 +55,22 @@ body, html {
 
 a.pill {
   display: inline-block;
+  text-transform:capitalize;
   color: grey;
   text-decoration: none;
   transition: .3s;
   text-align: center;
-  // span {
-    border-radius: 25px;
-    padding: 6px 20px;
-    transition: .3s;
-    background: url(ct-bkg-min.jpeg);
-    background-size: 250px;
-    background-position: left;
-    color: white;
-    border: 2px solid black;
-    &:hover, &:active {
-      background-position:right;
-    }
-  // }
+  border-radius: 25px;
+  padding: 6px 20px;
+  transition: .3s;
+  background: url(ct-bkg-min.jpeg);
+  background-size: 250px;
+  background-position: left;
+  color: white;
+  border: 2px solid black;
+  &:hover, &:active {
+    background-position:right;
+  }
 }
 
 .signature {
