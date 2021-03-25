@@ -13,13 +13,63 @@
       <h2>CWI FORM 2001</h2>
       <hr>
       <main>
-        <p><b><i><u>TODO: ADD CALL TO FTCSTATS API TO VERIFY TEAM'S SKILL</u></i></b></p>
         <h3>
           <form action="https://dynamic.jackcrane.rocks/api/forms/cwi/signup.php" method="post">
-            <input type="text" name="name" value="" placeholder="Team Name" class="pill">
-            <input type="number" name="teamnum" value="" placeholder="Team Number" class="pill">
-            <input type="email" name="email" value="" placeholder="Email address" class="pill">
-            <input type="submit" name="" value="submit" class="pill">
+            <input required type="number" name="teamnum" value="" placeholder="Team Number" class="pill signup">
+            <input required type="text" name="name" value="" placeholder="Team Name" class="pill signup">
+            <input type="text" name="status" value="" hidden>
+            <select required class="pill signup" name="region">
+              <option value="s" disabled selected>Select your region</option>
+              <option value="Alaska">Alaska</option>
+              <option value="Alberta">Alberta</option>
+              <option value="Arizona">Arizona</option>
+              <option value="Australia">Australia</option>
+              <option value="British_Columbia">British Columbia</option>
+              <option value="California">California</option>
+              <option value="Connecticut">Connecticut</option>
+              <option value="Delaware">Delaware</option>
+              <option value="Florida">Florida</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Hawaii">Hawaii</option>
+              <option value="Illinois">Illinois</option>
+              <option value="Indiana">Indiana</option>
+              <option value="Iowa">Iowa</option>
+              <option value="Israel">Israel</option>
+              <option value="Louisiana">Louisiana</option>
+              <option value="Maryland">Maryland</option>
+              <option value="Massachusetts">Massachusetts</option>
+              <option value="Michigan">Michigan</option>
+              <option value="Military_and_Diplomatic">Military and Diplomatic</option>
+              <option value="Minnesota">Minnesota</option>
+              <option value="Mississippi">Mississippi</option>
+              <option value="Missouri">Missouri</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="Nevada">Nevada</option>
+              <option value="New_Jersey">New Jersey</option>
+              <option value="New_York">New York</option>
+              <option value="NorCal">NorCal</option>
+              <option value="North_Carolina">North Carolina</option>
+              <option value="Ohio">Ohio</option>
+              <option value="Oklahoma">Oklahoma</option>
+              <option value="Ontario">Ontario</option>
+              <option value="Oregon">Oregon</option>
+              <option value="Pennsylvania">Pennsylvania</option>
+              <option value="Rhode_Island">Rhode Island</option>
+              <option value="Russia">Russia</option>
+              <option value="SoCal">SoCal</option>
+              <option value="South_Carolina">South Carolina</option>
+              <option value="Texas">Texas</option>
+              <option value="Utah">Utah</option>
+              <option value="Vermont">Vermont</option>
+              <option value="Virginia">Virginia</option>
+              <option value="Wisconsin">Wisconsin</option>
+            </select>
+            <input required type="email" name="email" value="" placeholder="Email address" class="pill signup">
+            <input type="submit" name="" value="submit" class="pill signup">
+            <hr>
+            <div class="return pill signup">
+
+            </div>
           </form>
         </h3>
       </main>
@@ -28,5 +78,168 @@
       <h1>This page is designed to be printed only. Print this page to get access to the data.</h1>
     </div>
   </body>
+  <script type="text/javascript">
+    let region = "";
 
+    document.querySelector("select[name='region']").addEventListener("change",e=>{
+      region = e.target.value;
+    })
+
+    document.querySelector("input[name='teamnum']").addEventListener("keyup",e=>{
+
+      if(e.target.value != "") {
+        let headers = new Headers();
+        headers.append("Accept", "application/json");
+
+        let formdata_ = new FormData();
+        formdata_.append("teamnum", e.target.value);
+
+        let requestOptions_ = {
+          method: 'POST',
+          headers: headers,
+          body: formdata_,
+          redirect: 'follow'
+        };
+
+        fetch("https://dynamic.jackcrane.rocks/api/ftcstats/fetch.php", requestOptions_)
+          .then(response => response.text())
+          .then(result => {
+            let result_JSON = JSON.parse(result)
+            if(result_JSON.data[0]?.teamname!=undefined) {
+              document.querySelector("input[name='name']").value = result_JSON.data[0]?.teamname;
+              document.querySelector("input[name='name']").classList.add("pulse")
+              setTimeout(function() {document.querySelector("input[name='name']").classList.remove("pulse")},900)
+              let location = result_JSON.data[0]?.location;
+              let options = document.querySelector("select[name='region']").querySelectorAll("option");
+              for(o of Object.keys(options)) {
+                if(options[o].innerText == location) {
+                  options[o].selected = true;
+                  region = location;
+                }
+              }
+              document.querySelector("select[name='region']").classList.add("pulse")
+              setTimeout(function() {document.querySelector("select[name='region']").classList.remove("pulse")},900)
+
+              //********************************************************************************
+
+              let myHeaders = new Headers();
+              myHeaders.append("Accept", "application/json");
+
+              let formdata = new FormData();
+              formdata.append("location", region);
+
+              let requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: formdata,
+                redirect: 'follow'
+              };
+
+              let stats;
+              let toi = document.querySelector("input[name='teamnum']").value
+              let teamstatus;
+
+              fetch("https://dynamic.jackcrane.rocks/api/ftcstats/fetch.php", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                  stats = JSON.parse(result)
+                  console.log(stats)
+                  for(let e of Object.keys(stats.data)) {
+                    let teamnum = stats.data[e].teamnum;
+                    console.log(toi == teamnum)
+                    let staterank = e;
+                    if(teamnum == toi) {
+                      teamstatus = "qualified"
+                      if(document.getElementById('status') == undefined) {
+                        let el = document.createElement('span');
+                        el.id = 'status';
+                        el.innerText = teamstatus;
+                        document.querySelector(".return").appendChild(el);
+                        document.querySelector("input[name='status']").value = teamstatus
+                      } else {
+                        let el = document.getElementById('status');
+                        el.innerText = teamstatus;
+                        document.querySelector("input[name='status']").value = teamstatus
+                      }
+                      document.querySelector(".return").classList.add("pulse")
+                      setTimeout(function() {document.querySelector(".return").classList.remove("pulse")},900)
+                      break;
+                    } else {
+                      document.querySelector(".return").classList.add("pulse")
+                      setTimeout(function() {document.querySelector(".return").classList.remove("pulse")},900)
+                    }
+                    if(staterank > 50){
+                      teamstatus = "waitlisted"
+                      if(document.getElementById('status') == undefined) {
+                        let el = document.createElement('span');
+                        el.id = 'status';
+                        el.innerText = teamstatus;
+                        document.querySelector(".return").appendChild(el);
+                        document.querySelector("input[name='status']").value = teamstatus
+                      } else {
+                        let el = document.getElementById('status');
+                        el.innerText = teamstatus;
+                        document.querySelector("input[name='status']").value = teamstatus
+                      }
+                      break;
+                    };
+                  }
+                })
+                .catch(error => console.log('error', error));
+            }
+          })
+          .catch(error => console.log('error', error));
+
+
+      }
+    })
+
+    /*document.querySelector("input[name='teamnum']").addEventListener("change",e=>{
+      let myHeaders = new Headers();
+      myHeaders.append("Accept", "application/json");
+
+      let formdata = new FormData();
+      formdata.append("location", region);
+
+      let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      let stats;
+      let toi = document.querySelector("input[name='teamnum']").value
+      let teamstatus;
+
+      fetch("https://dynamic.jackcrane.rocks/api/ftcstats/fetch.php", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          stats = JSON.parse(result)
+          console.log(stats)
+          for(let e of Object.keys(stats.data)) {
+            let teamnum = stats.data[e].teamnum;
+            let staterank = e;
+            teamstatus = (teamnum == toi) ? "approved" : "waitlisted";
+            if(teamnum == toi) {
+              if(document.getElementById('status') == undefined) {
+                let el = document.createElement('span');
+                el.id = 'status';
+                el.innerText = teamstatus;
+                document.querySelector(".return").appendChild(el);
+              } else {
+                let el = document.getElementById('status');
+                el.innerText = teamstatus;
+              }
+              document.querySelector(".return").classList.add("pulse")
+              setTimeout(function() {document.querySelector(".return").classList.remove("pulse")},900)
+            } else {
+
+            }
+            if(staterank > 25){ break };
+          }
+        })
+        .catch(error => console.log('error', error));
+    })*/
+  </script>
 </html>

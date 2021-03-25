@@ -53,40 +53,68 @@ body, html {
   }
 }
 
-a.pill {
+div.pill {
+  box-sizing: border-box;
+  transition:.3s;
+  border-radius:17px;
+  border:2px solid black;
+  padding: 6px 20px;
+  font-size:16px;
+  font-weight:normal;
+  &.signup {
+    margin: 10px 0;
+  }
+}
+
+a.pill, input[type='submit'].pill {
+  box-sizing:border-box;
   display: inline-block;
-  text-transform:capitalize;
+  // text-transform:capitalize;
   color: grey;
   text-decoration: none;
   transition: .3s;
   text-align: center;
-  border-radius: 25px;
+  border-radius: 17px;
   padding: 6px 20px;
   transition: .3s;
   background: url(ct-bkg-min.jpeg);
-  background-size: 250px;
+  background-size: 150%;
   background-position: left;
   color: white;
   border: 2px solid black;
-  &:hover, &:active {
+  cursor:pointer;
+  font-size:16px;
+  &:hover:not(:disabled), &:active:not(:disabled) {
     background-position:right;
+  }
+  &:disabled {
+    filter:grayscale(1)!important;
+    cursor:initial;
+  }
+  &.signup {
+    width:100%;
   }
 }
 
-input.pill {
+input.pill:not(input[type='submit']), select.pill {
+  box-sizing:border-box;
   display: block;
-  text-transform:capitalize;
+  // text-transform:capitalize;
   text-decoration: none;
   transition: .3s;
-  border-radius: 25px;
+  border-radius: 17px;
   padding: 6px 20px;
-  margin: 10px 0px;
   transition: .3s;
   color: black;
   border: 2px solid black;
+  font-size:16px;
   &:hover, &:active, &:focus {
     background-position:right;
     outline:none;
+  }
+  &.signup {
+    margin:10px 0px;
+    width:100%;
   }
 }
 
@@ -159,5 +187,24 @@ input.pill {
 @media print {
   .aboutcwi {
     padding:0;
+  }
+}
+
+.pulse {
+  animation:pulse .5s;
+}
+
+@keyframes pulse {
+  from {
+    background:rgba(0,255,0,0);
+  }
+  25% {
+    background:rgba(0,255,0,1);
+  }
+  75% {
+    background:rgba(0,255,0,1);
+  }
+  to {
+    background:rgba(0,255,0,0);
   }
 }
