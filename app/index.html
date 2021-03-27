@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app_lessc.css">
+    <script src="script.js" charset="utf-8" defer></script>
+  </head>
+  <body>
+    <nav>
+      <ul dir="rtl">
+        <li class="title"><h2>Registration</h2></li>
+        <a href="#qualifications"><li id="qualifications">Check your team's qualifications</li></a>
+        <a href="#signup"><li id="signup">Sign up</li></a>
+        <a href="#accounts"><li id="accounts">Create team accounts</li></a>
+        <a href="#forms"><li id="forms">Complete forms</li></a>
+        <a href="#uploads"><li id="uploads">Upload files</li></a>
+      </ul>
+    </nav>
+    <main>
+      <section id="section-qualifications">
+        <img src="../cwi-cot-compressed.svg" alt="">
+        <h1>Check your team's qualifications</h1>
+        <fieldset>
+          <legend>Team number</legend>
+          <input type="number" name="teamnum" value="" placeholder="Enter your team number">
+        </fieldset>
+        <fieldset>
+          <legend>About your team</legend>
+          <div class="details">
+            <p>Enter your team number above to get details</p>
+          </div>
+        </fieldset>
+        <input type="submit" name="teamsub" class="fieldset" value="Thats my team, continue" disabled>
+      </section>
+      <section id="section-signup">
+        <h2>Create a team admin account</h2>
+        <fieldset>
+          <legend>Email address</legend>
+          <input type="email" name="email" value="" placeholder="Enter your email address">
+        </fieldset>
+        <fieldset>
+          <legend>Password</legend>
+          <input type="password" name="password" value="" placeholder="Enter your password">
+        </fieldset>
+      </section>
+      <section id="section-accounts">
+        <h2>Invite your team</h2>
+        <fieldset>
+          <legend>Enter details</legend>
+          <p>You will enter each student's details one at a time.</p><br />
+          <fieldset class="nofocuswithin">
+            <legend>Name</legend>
+            <input type="text" name="" value="" placeholder="Participant name">
+          </fieldset>
+          <fieldset class="nofocuswithin">
+            <legend>Email</legend>
+            <input type="text" name="" value="" placeholder="Participant email address">
+          </fieldset>
+          <fieldset>
+            <legend>Role</legend>
+            <input type="radio" name="role" value="Student" id="Student"> <label for="Student">Student</label>
+            <input type="radio" name="role" value="Coach/mentor" id="CoachMentor"> <label for="CoachMentor">Coach/mentor</label>
+            <input type="radio" name="role" value="Parent" id="Parent"> <label for="Parent">Parent</label>
+          </fieldset>
+          <input type="submit" name="" value="Add">
+          <input type="text" name="" value="">
+        </fieldset>
+      </section>
+    </main>
+  </body>
+</html>
