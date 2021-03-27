@@ -111,3 +111,67 @@ window.addEventListener('load',engine.ops.hash)
 document.querySelectorAll("section").forEach(e=>{
   e.addEventListener('mouseover',o=>{if(o.target.localName == "section") document.location.hash = o.target.id.split("-")[1]})
 })
+
+document.querySelector("#section-signup").querySelector("input[type='email']").addEventListener('keyup',e=>{
+  if(e.target.parentNode.parentNode.querySelector("input[type='password']").value != "" && e.target.value != "") {
+    e.target.parentNode.parentNode.querySelector("input[type='submit']").disabled = false;
+  } else {
+    e.target.parentNode.parentNode.querySelector("input[type='submit']").disabled = true;
+  }
+})
+
+document.querySelector("#section-signup").querySelector("input[type='password']").addEventListener('keyup',e=>{
+  if(e.target.parentNode.parentNode.querySelector("input[type='email']").value != "" && e.target.value != "") {
+    e.target.parentNode.parentNode.querySelector("input[type='submit']").disabled = false;
+  } else {
+    e.target.parentNode.parentNode.querySelector("input[type='submit']").disabled = true;
+  }
+})
+
+let e_to_delete = "";
+document.querySelector("#section-accounts").querySelector("input[type='submit']").addEventListener('click',e=>{
+  let parent = e.target.parentNode;
+  let name = parent.querySelector("input[type='text']").value || "Not supplied";
+  let email = parent.querySelector("input[type='email']").value || "Not supplied";
+  let rank = "";
+  for(radio of Array.from(parent.querySelectorAll("input[type='radio']"))) {
+    if(radio.checked) {
+      rank = radio.value;
+      break;
+    };
+  }
+  parent.querySelector("input[type='text']").value = "";
+  parent.querySelector("input[type='email']").value = "";
+  let r = document.createElement("div");
+  r.classList.add("result");
+  let t = document.createElement("span");
+  t.classList.add("pill");
+  t.classList.add(rank);
+  t.innerText = rank;
+  r.appendChild(t);
+  let p = document.createElement("span");
+  p.innerText = `${name} | ${email}`;
+  r.appendChild(p);
+  let ed = document.createElement("b");
+  ed.innerHTML = "✏️";
+  ed.title = "Edit this entry";
+  ed.addEventListener("click",o=>{
+    let rank = o.target.parentNode.children[0].classList[1];
+    let name = o.target.parentNode.children[1].innerText.split(" | ")[0];
+    let email = o.target.parentNode.children[1].innerText.split(" | ")[1];
+    let fs = o.target.parentNode.parentNode.parentNode.querySelector("fieldset");
+    fs.querySelector("input[type='text']").value = name;
+    fs.querySelector("input[type='email']").value = email;
+    fs.querySelector(`input[type='radio'][value='${rank}']`).checked = true;
+    o.target.parentNode.remove();
+  })
+  let del = document.createElement("b");
+  del.innerHTML = "❌";
+  del.title = "Delete this entry";
+  del.addEventListener("click",o=>{
+    o.target.parentNode.remove();
+  })
+  r.appendChild(del)
+  r.appendChild(ed)
+  parent.parentNode.querySelector("fieldset.outputs").appendChild(r);
+})

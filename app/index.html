@@ -44,6 +44,7 @@
           <legend>Password</legend>
           <input type="password" name="password" value="" placeholder="Enter your password">
         </fieldset>
+        <input type="submit" name="pn" value="Submit" disabled>
       </section>
       <section id="section-accounts">
         <h2>Invite your team</h2>
@@ -56,16 +57,18 @@
           </fieldset>
           <fieldset class="nofocuswithin">
             <legend>Email</legend>
-            <input type="text" name="" value="" placeholder="Participant email address">
+            <input type="email" name="" value="" placeholder="Participant email address">
           </fieldset>
           <fieldset>
             <legend>Role</legend>
-            <input type="radio" name="role" value="Student" id="Student"> <label for="Student">Student</label>
-            <input type="radio" name="role" value="Coach/mentor" id="CoachMentor"> <label for="CoachMentor">Coach/mentor</label>
+            <input type="radio" name="role" value="Student" id="Student" checked> <label for="Student">Student</label>
+            <input type="radio" name="role" value="CoachMentor" id="CoachMentor"> <label for="CoachMentor">Coach/mentor</label>
             <input type="radio" name="role" value="Parent" id="Parent"> <label for="Parent">Parent</label>
           </fieldset>
           <input type="submit" name="" value="Add">
-          <input type="text" name="" value="">
+        </fieldset>
+        <fieldset class="outputs">
+          <legend>Participants</legend>
         </fieldset>
       </section>
     </main>

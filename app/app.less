@@ -96,6 +96,33 @@ main {
     border-radius:10px;
     font-size:inherit;
     margin-bottom:25px;
+    &.outputs {
+      .result {
+        margin:2px 0;
+        .pill {
+          padding:0 10px;
+          border-radius:50px;
+          margin-right:5px;
+          &.Student {
+            background:blue;
+            color:white;
+          }
+          &.CoachMentor {
+            background:red;
+            color:white;
+          }
+          &.Parent {
+            background:orange;
+            color:black;
+          }
+        }
+        b {
+          float:right;
+          cursor:pointer;
+          line-height:1;
+        }
+      }
+    }
     &:focus-within {
       border-width:2px;
     }
