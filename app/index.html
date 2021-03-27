@@ -14,8 +14,9 @@
         <a href="#qualifications"><li id="qualifications">Check your team's qualifications</li></a>
         <a href="#signup"><li id="signup">Sign up</li></a>
         <a href="#accounts"><li id="accounts">Create team accounts</li></a>
-        <a href="#forms"><li id="forms">Complete forms</li></a>
-        <a href="#uploads"><li id="uploads">Upload files</li></a>
+        <a href="#submit"><li id="submit">Final submission</li></a>
+        <!-- <a href="#forms"><li id="forms">Complete forms</li></a>
+        <a href="#uploads"><li id="uploads">Upload files</li></a> -->
       </ul>
     </nav>
     <main>
@@ -32,7 +33,7 @@
             <p>Enter your team number above to get details</p>
           </div>
         </fieldset>
-        <input type="submit" name="teamsub" class="fieldset" value="Thats my team, continue" disabled>
+        <input onclick="document.location.hash = 'signup'" type="submit" name="teamsub" class="fieldset" value="Thats my team, continue" disabled>
       </section>
       <section id="section-signup">
         <h2>Create a team admin account</h2>
@@ -44,7 +45,7 @@
           <legend>Password</legend>
           <input type="password" name="password" value="" placeholder="Enter your password">
         </fieldset>
-        <input type="submit" name="pn" value="Submit" disabled>
+        <input onclick="document.location.hash = 'accounts'" type="submit" name="pn" value="Submit" disabled>
       </section>
       <section id="section-accounts">
         <h2>Invite your team</h2>
@@ -70,6 +71,11 @@
         <fieldset class="outputs">
           <legend>Participants</legend>
         </fieldset>
+      </section>
+      <section id="section-submit">
+        <h2>Final Submission</h2>
+        <p>Before clicking this button, be sure to verify everything on the page.</p>
+        <input type="submit" name="" value="Click here to submit!">
       </section>
     </main>
   </body>

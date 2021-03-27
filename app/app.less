@@ -10,14 +10,12 @@
   --icol:black;
   --iwktxc:white;
   --iwktxw:6px;
-  // --iopacity:.25;
 }
 
 :target {
   --icol:white;
   --iwktxc:black;
   --iwktxw:1px;
-  // --iopacity:1;
 }
 
 html {scroll-behavior: smooth;}
@@ -174,8 +172,9 @@ main {
   }
   section {
     transition:.3s;
+    border-bottom:4px solid lightgrey;
     &:not(.focus) {
-      opacity:.15;
+      // opacity:.15;
     }
   }
 }

@@ -72,8 +72,23 @@ let engine = {
   }
 }
 
+let sub = {
+  team:{
+    number:undefined,
+    status:undefined
+  },
+  admin:{
+    email:undefined,
+    password:undefined
+  },
+  team:{
+    members:{}
+  }
+}
+
 document.querySelector("input[name='teamnum']").addEventListener('keyup',e=>{
   if(e.target.value != "" && !isNaN(e.target.value)) {
+    sub.team.number = parseInt(e.target.value);
     engine.ftcstats.getName(parseInt(e.target.value)).then(c=>{
       if(c!=undefined) {
         engine.ftcstats.getRank([parseInt(e.target.value),c[1]]).then(b=>{
@@ -88,6 +103,7 @@ document.querySelector("input[name='teamnum']").addEventListener('keyup',e=>{
           document.querySelector('div.details').appendChild(location);
           document.querySelector('div.details').appendChild(status);
           document.querySelector('input[name="teamsub"]').disabled = false;
+          sub.team.status = b.status;
         })
       } else {
         let p = document.createElement("p");
@@ -113,14 +129,15 @@ document.querySelectorAll("section").forEach(e=>{
 })
 
 document.querySelector("#section-signup").querySelector("input[type='email']").addEventListener('keyup',e=>{
+  sub.admin.email = e.target.value;
   if(e.target.parentNode.parentNode.querySelector("input[type='password']").value != "" && e.target.value != "") {
     e.target.parentNode.parentNode.querySelector("input[type='submit']").disabled = false;
   } else {
     e.target.parentNode.parentNode.querySelector("input[type='submit']").disabled = true;
   }
 })
-
 document.querySelector("#section-signup").querySelector("input[type='password']").addEventListener('keyup',e=>{
+  sub.admin.password = e.target.value;
   if(e.target.parentNode.parentNode.querySelector("input[type='email']").value != "" && e.target.value != "") {
     e.target.parentNode.parentNode.querySelector("input[type='submit']").disabled = false;
   } else {
@@ -129,6 +146,7 @@ document.querySelector("#section-signup").querySelector("input[type='password']"
 })
 
 let e_to_delete = "";
+let index = 0;
 document.querySelector("#section-accounts").querySelector("input[type='submit']").addEventListener('click',e=>{
   let parent = e.target.parentNode;
   let name = parent.querySelector("input[type='text']").value || "Not supplied";
@@ -140,6 +158,11 @@ document.querySelector("#section-accounts").querySelector("input[type='submit']"
       break;
     };
   }
+  sub.team.members[index] = {}
+  sub.team.members[index].name = name
+  sub.team.members[index].email = email
+  sub.team.members[index].rank = rank
+  sub.team.members[index].index = index
   parent.querySelector("input[type='text']").value = "";
   parent.querySelector("input[type='email']").value = "";
   let r = document.createElement("div");
@@ -169,9 +192,16 @@ document.querySelector("#section-accounts").querySelector("input[type='submit']"
   del.innerHTML = "❌";
   del.title = "Delete this entry";
   del.addEventListener("click",o=>{
+    let ix = o.target.parentNode.getAttribute("data-index")
+    // console.log(ix)
+    for(el of Object.keys(sub.team.members)) {
+      if(sub.team.members[el].index == ix){ delete sub.team.members[el];break }
+    }
     o.target.parentNode.remove();
   })
   r.appendChild(del)
   r.appendChild(ed)
+  r.setAttribute("data-index",index);
+  index++;
   parent.parentNode.querySelector("fieldset.outputs").appendChild(r);
 })
