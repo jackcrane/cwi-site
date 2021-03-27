@@ -65,9 +65,9 @@ let engine = {
   },
   ops:{
     hash:function(e) {
-      document.getElementById("section-" + e.target.location.hash.split("#")[1]).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+      document.getElementById("section-" + e.target.location.hash.split("#")[1])?.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
       document.querySelectorAll("section").forEach(e=>e.classList.remove('focus'))
-      document.getElementById("section-" + e.target.location.hash.split("#")[1]).classList.add('focus')
+      document.getElementById("section-" + e.target.location.hash.split("#")[1])?.classList.add('focus')
     }
   }
 }
@@ -108,3 +108,6 @@ document.querySelector("input[name='teamnum']").addEventListener('keyup',e=>{
 
 window.addEventListener('hashchange',engine.ops.hash)
 window.addEventListener('load',engine.ops.hash)
+document.querySelectorAll("section").forEach(e=>{
+  e.addEventListener('mouseover',o=>{if(o.target.localName == "section") document.location.hash = o.target.id.split("-")[1]})
+})
