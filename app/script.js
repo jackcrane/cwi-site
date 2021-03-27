@@ -125,7 +125,11 @@ document.querySelector("input[name='teamnum']").addEventListener('keyup',e=>{
 window.addEventListener('hashchange',engine.ops.hash)
 window.addEventListener('load',engine.ops.hash)
 document.querySelectorAll("section").forEach(e=>{
-  e.addEventListener('mouseover',o=>{if(o.target.localName == "section") document.location.hash = o.target.id.split("-")[1]})
+  e.addEventListener('mouseover',o=>{
+    if(o.target.localName == "section") {
+      document.location.hash = o.target.id.split("-")[1]
+    }
+  })
 })
 
 document.querySelector("#section-signup").querySelector("input[type='email']").addEventListener('keyup',e=>{
@@ -203,5 +207,5 @@ document.querySelector("#section-accounts").querySelector("input[type='submit']"
   r.appendChild(ed)
   r.setAttribute("data-index",index);
   index++;
-  parent.parentNode.querySelector("fieldset.outputs").appendChild(r);
+  parent.parentNode.querySelector("fieldset.outputs").prepend(r);
 })
