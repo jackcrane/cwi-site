@@ -68,6 +68,10 @@ let engine = {
       document.getElementById("section-" + e.target.location.hash.split("#")[1])?.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
       document.querySelectorAll("section").forEach(e=>e.classList.remove('focus'))
       document.getElementById("section-" + e.target.location.hash.split("#")[1])?.classList.add('focus')
+    },
+    hash_noscroll:function(e) {
+      document.querySelectorAll("section").forEach(e=>e.classList.remove('focus'))
+      document.getElementById("section-" + e.target.location.hash.split("#")[1])?.classList.add('focus')
     }
   }
 }
@@ -122,7 +126,7 @@ document.querySelector("input[name='teamnum']").addEventListener('keyup',e=>{
   }
 })
 
-window.addEventListener('hashchange',engine.ops.hash)
+window.addEventListener('hashchange',engine.ops.hash_noscroll)
 window.addEventListener('load',engine.ops.hash)
 document.querySelectorAll("section").forEach(e=>{
   e.addEventListener('mouseover',o=>{
