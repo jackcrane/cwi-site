@@ -1,6 +1,6 @@
 let engine = {
   consts:{
-    maxrank:25
+    maxrank:50
   },
   ftcstats:{
     getName:async (e) => {
@@ -72,6 +72,21 @@ let engine = {
     hash_noscroll:function(e) {
       document.querySelectorAll("section").forEach(e=>e.classList.remove('focus'))
       document.getElementById("section-" + e.target.location.hash.split("#")[1])?.classList.add('focus')
+    },
+    submit:async (e) => {
+      let headers = new Headers(); headers.append("Accept", "application/json");
+      let formdata = new FormData(); formdata.append("data", JSON.stringify(e));
+      let requestOptions = {
+        method: 'POST',
+        headers: headers,
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      let response = await fetch("https://dynamic.jackcrane.rocks/api/forms/cwi/v2/signup.php", requestOptions)
+      let r_json = await response.json();
+      console.log(r_json)
+      return r_json;
     }
   }
 }
@@ -152,6 +167,8 @@ document.querySelector("#section-signup").querySelector("input[type='password']"
     e.target.parentNode.parentNode.querySelector("input[type='submit']").disabled = true;
   }
 })
+
+document.querySelector("#submit_field").addEventListener('click',e=>{engine.ops.submit(sub)})
 
 let e_to_delete = "";
 let index = 0;
